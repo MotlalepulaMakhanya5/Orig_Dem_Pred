@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dementia Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Dementia Prediction Model</h1>
+        <form action="/predict" method="POST">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex" required>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+
+            <label for="education">Education Level (Number of Years in School):</label>
+            <input type="number" id="education" name="education" placeholder="Number of years in school" required>
+
+            <label for="dominant_hand">Dominant Hand:</label>
+            <select id="dominant_hand" name="dominant_hand" required>
+                <option value="Right">Right</option>
+                <option value="Left">Left</option>
+            </select>
+
+            <label for="visits">Number of Visits:</label>
+            <input type="number" id="visits" name="visits" placeholder="Number of hospital visits this year" required>
+
+            <label for="ses">Socioeconomic Status (SES):</label>
+            <input type="number" id="ses" name="ses" placeholder="1-5 score (5=>richest, 4=>rich, 3=>middle, 2=>poor, 1=>very poor )" required>
+
+            <label for="mr_delay">MR Delay:</label>
+            <input type="number" id="mr_delay" name="mr_delay" placeholder="MRI delay in days" required>
+
+            <label for="asf">ASF (Brain Scaling Factor):</label>
+            <input type="number" id="asf" name="asf" step="0.01" placeholder="Brain Scaling Factor" required>
+
+            <label for="mmse">MMSE (Cognitive Function Score):</label>
+            <input type="number" id="mmse" name="mmse" step="0.1" placeholder="0-30 score" required>
+
+            <label for="cdr">CDR (Clinical Dementia Rating):</label>
+            <input type="number" id="cdr" name="cdr" step="0.1" placeholder="0-3 score" required>
+
+            <label for="etiv">eTIV (Estimated Total Intracranial Volume):</label>
+            <input type="number" id="etiv" name="etiv" step="0.1" placeholder="Total intracranial volume" required>
+
+            <label for="nwbv">nWBV (Normalized Brain Volume):</label>
+            <input type="number" id="nwbv" name="nwbv" step="0.01" placeholder="Normalized brain volume" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <!-- Display prediction result -->
+        {% if prediction %}
+        <div class="result">
+            <p>Prediction: {{ prediction }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Display error message -->
+        {% if error %}
+        <div class="error">
+            <p>Error: {{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
